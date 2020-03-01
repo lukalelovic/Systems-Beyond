@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Planet
+  - Asteroid
+  - Sun
+  - Orbit
+  - Shop
+  - Swarm
+  - Fleet
+  - Bullet
+  - PUI
+  - Box
+  - Rocket
+  - Background
+  - Red Asteroid
+  - Holder
+  - Intro
+  - Resource
+  - Pirate
+  - Hive
+  - Foreground
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Back
+    uniqueID: 1375059739
+    locked: 0
+  - name: Asteroid
+    uniqueID: 3267009901
+    locked: 0
+  - name: Planet
+    uniqueID: 124790451
+    locked: 0
+  - name: Sun
+    uniqueID: 1198814021
+    locked: 0
+  - name: Cursor
+    uniqueID: 847202115
+    locked: 0
