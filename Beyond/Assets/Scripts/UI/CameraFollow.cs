@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour {
 
     public GameObject camFollow;
     public Camera cam;
-    private float moveSpeed;
+    float moveSpeed;
 
     void Update () {
 

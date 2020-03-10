@@ -130,8 +130,10 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 4cc51c4b688aff17831f59fe1f9b12ba Assembly-CSharp.dll:.Intro
 28a6d57762604a148499d5b4a30a1759 Assembly-CSharp.dll:.RedAsteroid
 cba2e349a9d89de041ec8f6b8bd61cd6 Assembly-CSharp.dll:.FleetController
+05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
+05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 abacee9973c828297e1ac16dc6815bb5 Assembly-CSharp.dll:.PauseGame
-fc5a08ba187a470536b3c42890bdaf37 Assembly-CSharp.dll:.NewsController
+7006c55091aec1ea3a68367ad34d91fe Assembly-CSharp.dll:.NewsController
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -174,6 +176,6 @@ b99c43181e1b9a8d844ed98e0c6bd0e1 Assembly-CSharp.dll:.ObjectRotation
 d19a496ffeed17538cb5b2bc39c539ee Assembly-CSharp.dll:.PlanetColor
 aafd65baa440c2d33f7b73ba09b6ef1c Assembly-CSharp.dll:.PrestigeController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlanetController
-28a6d57762604a148499d5b4a30a1759 Assembly-CSharp.dll:.AsteroidController
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AsteroidController
 2cfdd8b70c4ce2631c494ce042a3bd72 Assembly-CSharp.dll:.Tips
 fa5d567676183a6455ac489e7d7e9fd2 Assembly-CSharp.dll:.SystemSpawn

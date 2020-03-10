@@ -10,11 +10,12 @@ public class SunBuy : MonoBehaviour {
     public Text[] costTxts;
     public Button[] sunBtns;
     public ParticleSystem sunEffect;
-    private RaycastHit2D hit;
-    private int[] sunCosts;
-    private bool buying;
-    public static int mineMult, randSun;
 
+    public static int mineMult, randSun;
+    RaycastHit2D hit;
+    int[] sunCosts;
+    bool buying;
+    
     void Start() {
         sunCosts = new int[sunBtns.Length + 1];
         sunCosts[0] = 0; sunCosts[1] = 25000; sunCosts[2] = 50000;

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RedAsteroid : MonoBehaviour {
 
-    private GameObject closest;
-    private float asteroidScale;
-    private float distToSun;
+    GameObject closest;
+    float asteroidScale;
+    float distToSun;
     public float deleteTime;
 
     void Start () {

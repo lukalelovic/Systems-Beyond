@@ -8,7 +8,7 @@ public class Stats : MonoBehaviour {
     public static long stars, mines;
     public Text starTxt, lifeTxt;
     public static int life, lifeLevel, lifeMin, lifeStop;
-    private float countLife, mineTime;
+    float countLife, mineTime;
 
     void Start() {
         countLife = 0;

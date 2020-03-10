@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour {
 
-    private Rigidbody2D rb;
-    private float distToSun;
-    private float asteroidScale;
-    public float deleteTime;
+    Rigidbody2D rb;
+    float distToSun;
+    float asteroidScale;
+    float deleteTime;
 
     void Start() {
         asteroidScale = Random.Range(1f, 2.5f);

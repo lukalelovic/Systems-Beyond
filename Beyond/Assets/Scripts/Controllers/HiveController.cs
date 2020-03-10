@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HiveController : MonoBehaviour {
 
-    private float distToSun;
-    private float hiveScale;
+    float distToSun;
+    float hiveScale;
     public float deleteTime;
 
     void Start() {

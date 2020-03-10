@@ -8,10 +8,10 @@ public class FleetSpawn : MonoBehaviour {
     public GameObject playerFleet;
     public Image coolImg;
     public Text coolTxt;
-    private int shownCool;
-    private float cooldown;
-    private bool activated;
-
+    
+    int shownCool;
+    float cooldown;
+    bool activated;
 
     void Start() {
         cooldown = 1;

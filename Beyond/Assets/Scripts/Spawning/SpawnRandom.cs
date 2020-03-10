@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnRandom : MonoBehaviour {
 
     public GameObject rocket, backgroundStar;
-    private GameObject starParent, planet;
-    private int starAmount, count;
+    GameObject starParent, planet;
+    int starAmount, count;
 
     void Start() {
         starParent = new GameObject("Star Parent");

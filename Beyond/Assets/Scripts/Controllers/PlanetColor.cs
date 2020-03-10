@@ -16,49 +16,54 @@ public class PlanetColor : MonoBehaviour {
     public void setColor() {
         dist = Vector3.Distance(this.transform.position, GameObject.FindGameObjectWithTag("Sun").transform.position);
         if (this.gameObject.tag.Equals("Foreground")) {
-            if (dist >= 12f) {
-                r = Random.Range(10, 255); g = Random.Range(0, 255); b = Random.Range(165, 200);
-            } else if (dist >= 9f) {
-                r = Random.Range(0, 80); g = Random.Range(0, 255); b = Random.Range(200, 255);
-            } else if (dist >= 7f) {
-                r = Random.Range(0, 30); g = Random.Range(0, 60); b = Random.Range(130, 255);
-            } else if (dist >= 5f) {
-                r = Random.Range(0, 30); g = Random.Range(90, 130); b = Random.Range(0, 55);
-            } else if (dist >= 4f) {
-                r = g = b = Random.Range(100, 170);
-            } else {
-                r = Random.Range(200, 240); g = Random.Range(0, 33); b = Random.Range(0, 33);
-            }
+            if (dist >= 12f) 
+                assignColor(10,255,0,255,165,200);
+            else if (dist >= 9f) 
+                assignColor(0,80,0,255,200,255);
+            else if (dist >= 7f) 
+                assignColor(0,30,0,60,130,255);
+            else if (dist >= 5f) 
+                assignColor(0,30,90,130,0,55);
+            else if (dist >= 4f) 
+                assignColor(100,170,100,170,100,170);
+            else 
+                assignColor(200,240,0,33,0,33);
         } 
         else if (this.gameObject.tag.Equals("Background")) {
-            if (dist >= 12f) {
-                r = Random.Range(0, 255); g = Random.Range(0, 255); b = Random.Range(130, 255);
-            } else if (dist >= 9f) {
-                r = Random.Range(0, 10); g = Random.Range(0, 255); b = Random.Range(130, 255);
-            } else if (dist >= 7f) {
-                r = Random.Range(0, 130); g = Random.Range(120, 255); b = Random.Range(235, 255);
-            } else if (dist >= 5f) {
-                r = Random.Range(0, 30); g = Random.Range(130, 240); b = Random.Range(60, 86);
-            } else if (dist >= 4f) {
-                r = Random.Range(225, 255); g = Random.Range(105, 250); b = Random.Range(0, 80);
-            } else {
-                r = g = b = Random.Range(80, 120);
-            }
+            if (dist >= 12f) 
+                assignColor(0,255,0,255,130,255);
+            else if (dist >= 9f) 
+                assignColor(0,10,0,255,130,255);
+            else if (dist >= 7f) 
+                assignColor(0,130,120,255,235,255);
+            else if (dist >= 5f) 
+                assignColor(0,30,130,240,60,86);
+            else if (dist >= 4f)
+                assignColor(255,255,105,250,0,80);
+            else 
+                assignColor(80,120,0,0,0,0);
         } 
         else if (this.gameObject.tag.Equals("Planet")) {
-            if (dist >= 12f) {
-                r = Random.Range(10, 100); g = Random.Range(100, 200); b = Random.Range(0, 255);
-            } else if (dist >= 9f) {
-                r = Random.Range(0, 10); g = Random.Range(20, 255); b = Random.Range(130, 255);
-            } else if (dist > 7f) {
-                r = Random.Range(0, 130); g = Random.Range(120, 255); b = Random.Range(235, 255);
-            } else if (dist >= 5f) {
-                r = Random.Range(0, 70); g = Random.Range(0, 200); b = Random.Range(150, 255);
-            } else if (dist >= 4f) {
-                r = Random.Range(90, 255); g = Random.Range(0, 150); b = Random.Range(0, 80);
-            } else {
-                r = g = b = Random.Range(30, 70);
-            }
+            if (dist >= 12f) 
+                assignColor(10,100,100,200,0,255);
+            else if (dist >= 9f) 
+                assignColor(0,10,20,255,130,255);
+            else if (dist > 7f) 
+                assignColor(0,130,120,255,235,255);
+            else if (dist >= 5f) 
+                assignColor(0,70,0,200,150,255);
+            else if (dist >= 4f) 
+                assignColor(90,255,0,150,0,80);
+            else 
+                assignColor(30,70,0,0,0,0);
+        }
+    }
+
+    void assignColor(int rMin, int rMax, int gMin, int gMax, int bMin, int bMax) {
+        if (gMin == gMax) {
+            r = g = b = Random.Range(rMin, rMax);
+        } else {
+            r = Random.Range(rMin, rMax); g = Random.Range(gMin, gMax); b = Random.Range(bMin, bMax);
         }
     }
 }

@@ -8,19 +8,20 @@ using System.IO;
 public class PlanetMines : MonoBehaviour {
 
     public GameObject planetUI, customize;
-    private GameObject currentPlanet;
     public Button addLifeBtn, mineBtn;
     public Text planetNumTxt, mineTxt, mineCostTxt, outputTxt;
     public Text[] customCostsTxt;
     public Sprite[] customs;
-    private RaycastHit2D hit;
-    private int planetNum;
+    
+    GameObject currentPlanet;
+    RaycastHit2D hit;
+
     public static bool clickedPlanet;
-    private bool clickingUI, assignCosts; 
-    private int[] customCosts;
     public static int[] mineCost;
     public static int presitgeMult, changeCosts;
-
+    int[] customCosts;
+    int planetNum;
+    bool clickingUI, assignCosts; 
 
     void Start()
     {

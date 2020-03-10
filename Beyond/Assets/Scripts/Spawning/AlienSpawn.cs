@@ -6,10 +6,11 @@ public class AlienSpawn : MonoBehaviour {
 
     public GameObject[] swarms;
     public GameObject pirate;
-    private int swarmNum, spawnPt;
+    
     public static int swarmCount, pirateCount;
-    private float randX, randY, swarmTime, pirateTime;
     public static bool spawnSwarm, spawnPirate;
+    float randX, randY, swarmTime, pirateTime;
+    int swarmNum, spawnPt;
 
     void Start() {
         swarmTime = pirateTime = 1f;

@@ -8,13 +8,13 @@ public class NewsController : MonoBehaviour {
 
     public TextAsset notificationsTxt;
     public Text newsTxt;
+    
     public static bool asteroidHit;
     public static bool planetSpawned;
-    private int[] lifeValues = { 1,5,10,15,21,25,27,30,33,41,42,50,55,59,61,65,70,80,90,100 };
-    private bool[] used = new bool[30];
-    private string[] notifications;
+    int[] lifeValues = { 1,5,10,15,21,25,27,30,33,41,42,50,55,59,61,65,70,80,90,100 };
+    bool[] used = new bool[30];
+    string[] notifications;
     
-
 	void Start () {
         notifications = (notificationsTxt.text.Split('\n'));
         newsTxt.text = "";

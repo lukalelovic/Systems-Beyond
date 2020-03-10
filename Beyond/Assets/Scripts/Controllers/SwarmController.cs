@@ -6,7 +6,7 @@ public class SwarmController : MonoBehaviour {
 
     public Rigidbody2D rb;
     public float swarmScale, distToSun;
-    private float subtractTime;
+    float subtractTime;
     public bool travelTowards;
 
 	void Start () {

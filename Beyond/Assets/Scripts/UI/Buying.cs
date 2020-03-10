@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Buying : MonoBehaviour {
 
     public GameObject fleetUI, systemUI, fleetCustomUI;
-    private bool custom;
+    bool custom;
 
 	void Start () {
         fleetUI.SetActive(false);

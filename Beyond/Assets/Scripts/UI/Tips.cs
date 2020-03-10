@@ -7,9 +7,9 @@ public class Tips : MonoBehaviour {
 
     public GameObject tipObj;
     public Text tipTxt;
-    private bool[] newTip;
-    private float fadeTime, tipTime;
-    private int iAlpha;
+    bool[] newTip;
+    float fadeTime, tipTime;
+    int iAlpha;
 
 	void Start () {
         newTip = new bool[14];

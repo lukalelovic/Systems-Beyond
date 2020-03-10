@@ -8,9 +8,8 @@ public class Intro : MonoBehaviour {
     public Text quoteTxt;
 
     public static bool currentIntro;
-
-    private int fadeOut;
-    private float fadeTime;
+    int fadeOut;
+    float fadeTime;
 
 	void Start () {
         fadeOut = 255;

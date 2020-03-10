@@ -8,7 +8,7 @@ public class Cursor : MonoBehaviour {
     public Texture2D defaultTxt, selectTxt;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
-    private bool showHover;
+    bool showHover;
 
     void Start() {
         UnityEngine.Cursor.SetCursor(defaultTxt, hotSpot, cursorMode);

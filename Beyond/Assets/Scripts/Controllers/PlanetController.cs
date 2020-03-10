@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlanetController : MonoBehaviour {
 
-    private Camera cam;
-    private AnimationController shake;
-    private float starsAsteroids;
+    Camera cam;
+    AnimationController shake;
+    float starsAsteroids;
+    
     void Start() {
         NewsController.planetSpawned = true;
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();

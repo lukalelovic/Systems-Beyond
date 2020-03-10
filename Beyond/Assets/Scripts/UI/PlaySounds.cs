@@ -10,7 +10,7 @@ public class PlaySounds : MonoBehaviour {
 
     public static bool mineClip, shopClip, purchase, collide, notification, swarmClip, shootClip;
 
-    private float waitToPlay;
+    float waitToPlay;
 
     void Start() {
         waitToPlay = 1f;

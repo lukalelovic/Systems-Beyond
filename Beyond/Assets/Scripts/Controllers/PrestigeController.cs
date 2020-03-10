@@ -8,8 +8,10 @@ public class PrestigeController : MonoBehaviour {
 	public Button prestigeBtn;
 	public Text prestigeTxt;
 	public GameObject prestigeConfirm;
+	
 	public static bool prestige;
 	public static int prestigeLvl;
+
 	void Start () {
 		prestigeBtn.gameObject.SetActive(false);
 		prestigeConfirm.gameObject.SetActive(false);

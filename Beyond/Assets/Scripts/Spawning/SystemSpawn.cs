@@ -7,10 +7,11 @@ public class SystemSpawn : MonoBehaviour {
     public Sprite[] foregrounds, backgrounds;
     public GameObject planet, planetBackground, planetForeground;
     public TextAsset namesTxt;
+    
     public static int planetAmount, planetsSpawned;
     public static float previousPos;
-    private string[] planetNames;
-    private int r, g, b;
+    string[] planetNames;
+    int r, g, b;
 
 	void Start () {
         planetsSpawned = 0;

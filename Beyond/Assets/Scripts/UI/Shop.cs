@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour {
 
     public Canvas shop;
-    private bool canShop;
+    bool canShop;
     
 	void Start () {
         shop.gameObject.SetActive(false);

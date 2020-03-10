@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class UIFollow : MonoBehaviour {
 
     public GameObject planetLabel;
-
-    private bool clicked;
+    bool clicked;
 
     void Start() {
         planetLabel.SetActive(false);

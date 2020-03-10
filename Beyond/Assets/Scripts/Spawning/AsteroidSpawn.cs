@@ -9,12 +9,12 @@ public class AsteroidSpawn : MonoBehaviour {
     public GameObject[] greenAsteroids;
     public GameObject[] redAsteroids;
 
-    private Vector3 randPos, frozenPos, redPos;
-    private bool canSpawn, greenSpawn;
-    private int randomObj, spawnPoint, fleetExists;
+    Vector3 randPos, frozenPos, redPos;
+    bool canSpawn, greenSpawn;
+    int randomObj, spawnPoint, fleetExists;
 
-    private float randTime;
-    private float frozenTime, greenTime, redTime;
+    float randTime;
+    float frozenTime, greenTime, redTime;
 
     void Start () {
         randTime = 3f; greenTime = 7f; frozenTime = 3f; redTime = 6f;

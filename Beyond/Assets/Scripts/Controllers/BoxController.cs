@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxController : MonoBehaviour {
 
     public GameObject boxPrefab;
-    private GameObject[] asteroids, swarms, planets, pirates;
+    GameObject[] asteroids, swarms, planets, pirates;
 
     void Update () {
         asteroids = GameObject.FindGameObjectsWithTag("Asteroid");

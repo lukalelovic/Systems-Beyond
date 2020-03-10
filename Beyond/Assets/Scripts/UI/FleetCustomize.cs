@@ -9,7 +9,7 @@ public class FleetCustomize : MonoBehaviour {
     public Sprite[] fleets;
     public Text[] fleetCostsTxt;
     public static Sprite currentFleet;
-    private int[] fleetCosts;
+    int[] fleetCosts;
 
 	void Start () {
         fleetCosts = new int[10];

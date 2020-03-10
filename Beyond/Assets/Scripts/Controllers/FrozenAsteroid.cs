@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FrozenAsteroid : MonoBehaviour {
 
-    private GameObject closest;
-    private float frozenScale;
-    private float distToSun;
+    GameObject closest;
+    float frozenScale;
+    float distToSun;
     public float deleteTime;
 
     void Start() {

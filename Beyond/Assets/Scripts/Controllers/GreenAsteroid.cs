@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GreenAsteroid : MonoBehaviour {
 
-    private Rigidbody2D rb;
-    private float distToSun;
-    private float asteroidScale;
+    Rigidbody2D rb;
+    float distToSun;
+    float asteroidScale;
 
     void Start () {
         asteroidScale = Random.Range(0.8f, 1.5f);

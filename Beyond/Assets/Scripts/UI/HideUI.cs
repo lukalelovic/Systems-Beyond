@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HideUI : MonoBehaviour {
 
     public Canvas[] canvasUI;
-    private bool hide;
+    bool hide;
 
 	void Update () {
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ObjectDeflect : MonoBehaviour {
 
-    private GameObject objHit;
-    private int resourceNum;
-    private float objHP, regenTime;
+    GameObject objHit;
+    int resourceNum;
+    float objHP, regenTime;
     public static bool spawnSmalls;
     public static Vector2 spawnPos;
 
