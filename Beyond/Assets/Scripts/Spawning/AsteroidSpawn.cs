@@ -2,115 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidSpawn : MonoBehaviour {
+public class AsteroidSpawn : MonoBehaviour
+{
 
     public GameObject[] asteroids;
-    public GameObject[] frozenAsteroids;
-    public GameObject[] greenAsteroids;
-    public GameObject[] redAsteroids;
-
-    Vector3 randPos, frozenPos, redPos;
-    bool canSpawn, greenSpawn;
+    
+    Vector3 randPos;
     int randomObj, spawnPoint, fleetExists;
+    float randTime, frozenTime, greenTime, redTime;
 
-    float randTime;
-    float frozenTime, greenTime, redTime;
-
-    void Start () {
+    void Start() {
         randTime = 3f; greenTime = 7f; frozenTime = 3f; redTime = 6f;
-	}
+    }
 
     void Update() {
         fleetExists = GameObject.FindGameObjectsWithTag("Fleet").Length;
-        nAsteroid();
-        fAsteroid();
-        gAsteroid();
-        rAsteroid();
+        
+        spawnAsteroid("normal", ref randTime, false, randPos);
+        spawnAsteroid("frozen", ref frozenTime, true, new Vector3(Random.Range(-30, 30), Random.Range(-30, 30), 0f));
+        spawnAsteroid("green", ref greenTime, false, randPos);
+        spawnAsteroid("red", ref redTime, true, new Vector3(Random.Range(-30, 30), Random.Range(-30, 30), 0f));
         Spawns(); //Random pos for moving asteroids
     }
 
-
-    public void nAsteroid() { //Normal asteroids
-    
-        if (canSpawn == true)
-        {
+    public void spawnAsteroid(string clr, ref float spawnTime, bool frozen, Vector3 pos) {
+        if (spawnTime <= 0) {
             randomObj = Random.Range(0, 3);
-            spawnPoint = Random.Range(1, 5); //Allow random spawn point
 
-            Instantiate(asteroids[randomObj], randPos, Quaternion.identity);
+            if (!frozen)
+                spawnPoint = Random.Range(1, 5); //Allow random spawn point
 
-            randTime = Random.Range(15f, 30f) / (PrestigeController.prestigeLvl + 1); //Set the timer (makes the if false)
+            GameObject newAsteroid = Instantiate(asteroids[randomObj], pos, Quaternion.identity);
 
-            fleetCheck(randTime); //Change the time spawning takes depending on amount of fleet
-        }
-        else
-            randTime -= Time.deltaTime; //Countdown timer to spawn asteroid
+            if (clr.Equals("red")) { //Red Asteroids
+                newAsteroid.GetComponent<SpriteRenderer>().color = new Color32(249, 92, 92, 255);
+                newAsteroid.tag = "Red Asteroid";
+                spawnTime = Random.Range(4f, 8f) / (PrestigeController.prestigeLvl + 1);
+                newAsteroid.AddComponent<RedAsteroid>();
+            } else if (clr.Equals("green")) { //Green Asteroids
+                newAsteroid.GetComponent<SpriteRenderer>().color = new Color32(0, 255, 0, 255);
+                newAsteroid.AddComponent<GreenAsteroid>();
+                spawnTime = Random.Range(7f, 14f) / (PrestigeController.prestigeLvl + 1);
+            } else if (frozen) { //Frozen Asteroids
+                spawnTime = Random.Range(1.5f, 3.5f) / (PrestigeController.prestigeLvl + 1);
+                newAsteroid.AddComponent<FrozenAsteroid>();
+            } else { //Normal Asteroids
+                spawnTime = Random.Range(15f, 30f) / (PrestigeController.prestigeLvl + 1);
+                newAsteroid.AddComponent<AsteroidController>();
+            }
 
-        if (randTime <= 0)
-            canSpawn = true;
-        else
-            canSpawn = false;
-    }
-
-
-    public void fAsteroid() { //Frozen asteroids
-    
-        if (frozenTime <= 0) {
-            randomObj = Random.Range(0, 3);
-            frozenPos = new Vector3(Random.Range(-30, 30), Random.Range(-30, 30), 0f);
-            Instantiate(frozenAsteroids[randomObj], frozenPos, Quaternion.identity);
-            frozenTime = Random.Range(1.5f, 3.5f) / (PrestigeController.prestigeLvl + 1);
-
-            fleetCheck(frozenTime);
+            fleetCheck(spawnTime);
         } else {
-            frozenTime -= Time.deltaTime;
+            spawnTime -= Time.deltaTime;
         }
-    }
 
-    public void gAsteroid() { //Green asteroids
-    
-        if (greenSpawn == true) {
-            randomObj = Random.Range(0, 3);
-            spawnPoint = Random.Range(1, 5); 
-
-            Instantiate(greenAsteroids[randomObj], randPos, Quaternion.identity);
-            greenTime = Random.Range(7f, 14f) / (PrestigeController.prestigeLvl + 1);
-
-            fleetCheck(greenTime);
-        }
-        else
-            greenTime -= Time.deltaTime; 
-
-        if (greenTime <= 0)
-            greenSpawn = true;
-        else
-            greenSpawn = false;
-    }
-
-    public void rAsteroid() { //Red asteroids
-    
-        if (redTime <= 0) {
-            randomObj = Random.Range(0, 3);
-            redPos = new Vector3(Random.Range(-30, 30), Random.Range(-30, 30), 0f);
-            Instantiate(redAsteroids[randomObj], redPos, Quaternion.identity);
-            redTime = Random.Range(4f, 8f) / (PrestigeController.prestigeLvl + 1);
-
-            fleetCheck(redTime);
-        }
-        else
-            redTime -= Time.deltaTime;
-        
         if (ObjectDeflect.spawnSmalls == true) { //Spawn small red asteroids
-        
-            GameObject redHolder = new GameObject("Holder"); redHolder.transform.position = new Vector3(ObjectDeflect.spawnPos.x, ObjectDeflect.spawnPos.y, 0f); randomObj = Random.Range(0, 3);
-            GameObject redOne = Instantiate(redAsteroids[randomObj], new Vector3(ObjectDeflect.spawnPos.x - 0.6f, ObjectDeflect.spawnPos.y + 0.6f, 0f), Quaternion.identity); randomObj = Random.Range(0, 3);
-            GameObject redTwo = Instantiate(redAsteroids[randomObj], new Vector3(ObjectDeflect.spawnPos.x + 0.6f, ObjectDeflect.spawnPos.y + 0.6f, 0f), Quaternion.identity); randomObj = Random.Range(0, 3);
-            GameObject redThree = Instantiate(redAsteroids[randomObj], new Vector3(ObjectDeflect.spawnPos.x - 0.6f, ObjectDeflect.spawnPos.y - 0.6f, 0f), Quaternion.identity); randomObj = Random.Range(0, 3);
-            GameObject redFour = Instantiate(redAsteroids[randomObj], new Vector3(ObjectDeflect.spawnPos.x + 0.6f, ObjectDeflect.spawnPos.y - 0.6f, 0f), Quaternion.identity);
+            GameObject redHolder = null;
+            float offsetX = -0.6f, offsetY = 0.6f;
 
-            redOne.transform.parent = redHolder.transform; redTwo.transform.parent = redHolder.transform; redThree.transform.parent = redHolder.transform; redFour.transform.parent = redHolder.transform;
+            for (int i = 0; i < 5; i++) {
+                if (i == 0) {
+                    redHolder = new GameObject("Holder");
+                    redHolder.transform.position = new Vector3(ObjectDeflect.spawnPos.x, ObjectDeflect.spawnPos.y, 0f);
+                } else {
+                    GameObject newRed = Instantiate(asteroids[randomObj], new Vector3(ObjectDeflect.spawnPos.x + offsetX, ObjectDeflect.spawnPos.y + offsetY, 0f), Quaternion.identity);
+                    newRed.transform.parent = redHolder.transform;
+                    newRed.AddComponent<RedAsteroid>();
+                    newRed.GetComponent<SpriteRenderer>().color = new Color32(249, 92, 92, 255);
+                    newRed.tag = "Red Asteroid";
+
+                    if (i != 2) {
+                        offsetX /= -1f;
+                        offsetY /= -1f;
+                    } else {
+                        offsetY /= -1f;
+                    }
+                }
+                randomObj = Random.Range(0, 3);
+            }
             redHolder.tag = "Holder";
-
             ObjectDeflect.spawnSmalls = false;
         } else {
             GameObject[] holders = GameObject.FindGameObjectsWithTag("Holder");
@@ -122,6 +92,7 @@ public class AsteroidSpawn : MonoBehaviour {
     }
 
     public void Spawns() {
+
         if (spawnPoint > 0) {
             if (spawnPoint == 1)
                 randPos = new Vector3(Random.Range(-70, 70), 50, 0f);

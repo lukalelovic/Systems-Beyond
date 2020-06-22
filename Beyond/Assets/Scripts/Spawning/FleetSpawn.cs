@@ -14,7 +14,7 @@ public class FleetSpawn : MonoBehaviour {
     bool activated;
 
     void Start() {
-        cooldown = 1;
+        cooldown = 1f;
     }
 
 
@@ -28,13 +28,13 @@ public class FleetSpawn : MonoBehaviour {
                 coolTxt.gameObject.SetActive(false);
             }
 
-            if (activated == true) {  
-                if (FleetController.placing == false) { //Activate cooldown after fleet is placed
-                    coolImg.gameObject.SetActive(true);
-                    coolTxt.gameObject.SetActive(true);
-                    cooldown = 51;
-                    activated = false;
-                }
+            if (activated) {  //Activate cooldown after fleet is placed
+                coolImg.gameObject.SetActive(true);
+                coolTxt.gameObject.SetActive(true);
+
+                
+                activated = false;
+                cooldown = 51f;
             }
 
             coolTxt.color = Color.white;
@@ -44,13 +44,17 @@ public class FleetSpawn : MonoBehaviour {
             coolTxt.color = new Color32(0, 255, 76, 255);
             coolTxt.text = "50%";
         }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            clickFleet();
+        }
     }
 
     public void clickFleet() {
         if (cooldown <= 0) {
             Instantiate(playerFleet, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Quaternion.identity);
             activated = true;
-            PlaySounds.shopClip = true;
+            PlaySounds.shopClip = true;  
         }
     }
 }

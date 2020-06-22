@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CircleDraw : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class CircleDraw : MonoBehaviour
         float sizeValue = (2.0f * Mathf.PI) / theta_scale;
         size = (int)sizeValue;
         size++;
+        
         lineRenderer = this.gameObject.AddComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
         lineRenderer.startColor = new Color32(25, 25, 25, 55);
@@ -29,10 +30,12 @@ public class CircleDraw : MonoBehaviour
         float theta = 0f;
         for (int i = 0; i < size; i++) {
             theta += (2.0f * Mathf.PI * theta_scale);
+
             x = radius * Mathf.Cos(theta);
             y = radius * Mathf.Sin(theta);
             x += gameObject.transform.position.x;
             y += gameObject.transform.position.y;
+
             pos = new Vector3(x, y, 0);
             lineRenderer.SetPosition(i, pos);
         }

@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 58938814004980716}
   - component: {fileID: 50092358411183904}
   - component: {fileID: 114727319067517928}
-  - component: {fileID: 114868326736629130}
   m_Layer: 0
   m_Name: Asteroid 3
   m_TagString: Asteroid
@@ -91,18 +90,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 15
---- !u!114 &114868326736629130
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1831368853320464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a047d72fb841c1040bfaa4a5122f0f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxPrefab: {fileID: 1498544037755814, guid: 13df443015033bd4aa2ff42c66ab0e93, type: 2}
 --- !u!212 &212441742898945086
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +122,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1027957395
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: eb92ba16b111a8848a4d3e2462e9f720, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

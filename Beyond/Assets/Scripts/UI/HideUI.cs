@@ -5,28 +5,26 @@ using UnityEngine.UI;
 
 public class HideUI : MonoBehaviour {
 
-    public Canvas[] canvasUI;
+    public GameObject UI;
     bool hide;
 
 	void Update () {
 
         //Press f1 to hide the UI
 		if (Input.GetKeyDown(KeyCode.F1)) {
-            if (hide == false)
+            if (!hide)
                 hide = true;
             else
                 hide = false;
         }
 
         //Hide the UI elements
-        if (hide == true) {
+        if (hide) {
             UnityEngine.Cursor.visible = false;
-            for (int i = 0; i < canvasUI.Length; i++)
-                canvasUI[i].gameObject.SetActive(false);
+            UI.SetActive(false);
         } else {
             UnityEngine.Cursor.visible = true;
-            for (int i = 0; i < canvasUI.Length; i++)
-                canvasUI[i].gameObject.SetActive(true);
+            UI.SetActive(true);
         }
 	}
 }

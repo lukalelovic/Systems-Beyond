@@ -7,15 +7,13 @@ public class Intro : MonoBehaviour {
     public Image introImg;
     public Text quoteTxt;
 
-    public static bool currentIntro;
-    int fadeOut;
+    public static int fadeOut;
     float fadeTime;
 
 	void Start () {
         fadeOut = 255;
         fadeTime = 1.5f;
         introCanvas.gameObject.SetActive(true);
-        currentIntro = true;
 	}
 	
 	void Update () {
@@ -27,9 +25,6 @@ public class Intro : MonoBehaviour {
                 quoteTxt.color = new Color32(255, 255, 255, (byte)fadeOut);
                 fadeOut -= 1;
             }
-
-            if (fadeOut <= 175)
-                currentIntro = false;
         } else {
             introCanvas.gameObject.SetActive(false);
         }

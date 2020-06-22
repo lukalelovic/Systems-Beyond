@@ -23,20 +23,25 @@ public class BulletController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Swarm")) {
             Destroy(other.gameObject);
-            Destroy(this.gameObject);
+
+            if (this.transform.localScale.x < 5)
+                Destroy(this.gameObject);
         } else if (other.gameObject.CompareTag("Asteroid")) {
-            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+
+            if (this.transform.localScale.x < 5)
+                Destroy(this.gameObject);
         } else if (other.gameObject.CompareTag("Sun")) {
             Destroy(this.gameObject);
         } else if (other.gameObject.CompareTag("Planet")) {
-            if (Stats.stars > 500)
-                Stats.stars -= (long) Random.Range(Stats.stars / 25, Stats.stars / 15);
-            else
-                Stats.stars -= (long) Random.Range(Stats.stars / 15, Stats.stars / 5);
-            
+            Stats.stars -= (long) (Random.Range(Stats.stars / 15, Stats.stars / 5) * (PrestigeController.prestigeLvl + 1) * (int)this.transform.localScale.x);
+            SystemSpawn.hitObj = other.gameObject;
+
             Destroy(this.gameObject);
         } else if (other.gameObject.CompareTag("Fleet")) {
             Destroy(other.gameObject);
+        } else if (other.gameObject.CompareTag("Shield")) {
+            Destroy(this.gameObject);
         }
     }
 }

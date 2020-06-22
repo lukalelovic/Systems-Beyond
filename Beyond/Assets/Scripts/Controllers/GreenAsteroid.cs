@@ -26,14 +26,17 @@ public class GreenAsteroid : MonoBehaviour {
 	void Update () {
         distToSun = Vector3.Distance(new Vector3(0, 0, 0), this.transform.position);
 
-        if (distToSun > 70 || distToSun < -70) {
+        if (distToSun > 70 || distToSun < -70) 
             Destroy(this.gameObject);
-        }
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Sun")) {
+        if (other.gameObject.CompareTag("Sun")) 
             Destroy(this.gameObject);
+        if (other.gameObject.CompareTag("Shield")) {
+            Destroy(other.gameObject);
+
+            GlobalFunc.Shake(new Vector3(this.transform.position.x, this.transform.position.y, -10));
         }
     }
 }

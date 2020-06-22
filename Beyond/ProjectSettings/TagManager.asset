@@ -12,7 +12,6 @@ TagManager:
   - Swarm
   - Fleet
   - Bullet
-  - PUI
   - Box
   - Rocket
   - Background
@@ -23,6 +22,8 @@ TagManager:
   - Pirate
   - Hive
   - Foreground
+  - Boss
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -69,9 +70,9 @@ TagManager:
   - name: Planet
     uniqueID: 124790451
     locked: 0
+  - name: Boss
+    uniqueID: 847202115
+    locked: 0
   - name: Sun
     uniqueID: 1198814021
-    locked: 0
-  - name: Cursor
-    uniqueID: 847202115
     locked: 0

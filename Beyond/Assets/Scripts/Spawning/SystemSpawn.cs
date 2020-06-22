@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class SystemSpawn : MonoBehaviour {
 
+    public ParticleSystem hitEffect;
     public Sprite[] foregrounds, backgrounds;
     public GameObject planet, planetBackground, planetForeground;
     public TextAsset namesTxt;
     
+    public static GameObject hitObj;
     public static int planetAmount, planetsSpawned;
     public static float previousPos;
+
+    ParticleSystem newEffect;
     string[] planetNames;
+    float deleteTime;
     int r, g, b;
 
 	void Start () {
@@ -22,8 +27,7 @@ public class SystemSpawn : MonoBehaviour {
 
 	void Update () {
 
-        if (planetAmount < 11) { //Spawn planets
-        
+        if (planetAmount < 11) { //Spawn planets   
             while (planetsSpawned < planetAmount) {
                 GameObject newPlanet = Instantiate(planet, new Vector3(0, -1.179993f, 0), Quaternion.identity);
                 GameObject newBack = Instantiate(planetBackground, new Vector3(0, newPlanet.transform.GetChild(0).transform.position.y, -1), Quaternion.identity);
@@ -50,6 +54,19 @@ public class SystemSpawn : MonoBehaviour {
 
                 planetsSpawned++;
             }
+        }
+
+        if (hitObj != null) {
+            newEffect = Instantiate(hitEffect, hitObj.transform.position, Quaternion.identity);
+            deleteTime = 1f;
+
+            hitObj = null;
+        }
+
+        if (deleteTime > 0) {
+            deleteTime -= Time.deltaTime;
+        } else {
+            Destroy(newEffect);
         }
     }
 }

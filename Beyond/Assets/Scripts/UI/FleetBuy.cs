@@ -8,7 +8,7 @@ public class FleetBuy : MonoBehaviour {
 
     public Text hpcTxt, scTxt; //Health and speed cost text 
     public static float fleetHP, fleetSpeed;
-    public static int healthCost, speedCost;
+    public static long healthCost, speedCost;
 
 	void Start () {
         if (!File.Exists(Application.dataPath + "/Player_Save.json")) {
@@ -25,12 +25,12 @@ public class FleetBuy : MonoBehaviour {
             scTxt.color = new Color32(229, 198, 25, 255);
 
             if (fleetSpeed < 0.2f)
-                Abbreviation.setAbbreviation(speedCost, scTxt);
+                GlobalFunc.setLongAbbreviation(speedCost, scTxt);
             else
                 scTxt.text = "MAX";
 
             if (fleetHP < 300) 
-                Abbreviation.setAbbreviation(healthCost, hpcTxt);
+                GlobalFunc.setLongAbbreviation(healthCost, hpcTxt);
             else
                 hpcTxt.text = "MAX";
         } else {
@@ -44,18 +44,24 @@ public class FleetBuy : MonoBehaviour {
     public void clickHealth() {
         if (Stats.stars >= healthCost && Stats.life >= 50 && fleetHP < 300) {
             Stats.stars -= healthCost;
+
             fleetHP = fleetHP * 1.2f;
             healthCost = healthCost * 3;
             PlaySounds.purchase = true;
+        } else {
+            PlaySounds.shopClip = true;
         }
     }
 
     public void clickSpeed() {
         if (Stats.stars >= speedCost && Stats.life >= 50 && fleetSpeed < 0.2f) {
             Stats.stars -= speedCost;
+            
             fleetSpeed += 0.005f;
             speedCost = speedCost * 2;
             PlaySounds.purchase = true;
+        } else {
+            PlaySounds.shopClip = true;
         }
     }
 }

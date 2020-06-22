@@ -5,89 +5,74 @@ using UnityEngine;
 public class ObjectDeflect : MonoBehaviour {
 
     GameObject objHit;
-    int resourceNum;
-    float objHP, regenTime;
     public static bool spawnSmalls;
     public static Vector2 spawnPos;
 
-    void Start () {
-		regenTime = 2f;
-	}
+    float objHP;
+
     void Update() {
         RaycastHit2D hit;
+        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
         if (Input.GetMouseButton(0)) {
-            hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-            //Check for click on objects
-            if (hit.collider != null && hit.transform.gameObject.tag == "Asteroid") {
-                objHit = hit.transform.gameObject;
-                PlaySounds.mineClip = true;
-                hitObj();
-            }
-            if (hit.collider != null && hit.transform.gameObject.tag == "Swarm") {
-                objHit = hit.transform.gameObject;
-                PlaySounds.swarmClip = true;
-                hitObj();
-            }
-            if (hit.collider != null && hit.transform.gameObject.tag == "Pirate") {
-                objHit = hit.transform.gameObject;
-                PlaySounds.mineClip = true;
-                hitObj();
-            }
-            if (hit.collider != null && hit.transform.gameObject.tag == "Red Asteroid") {
-                if (hit.transform.parent == null)
-                    spawnSmalls = true;
-
-                hitObj();
-                PlaySounds.mineClip = true;
-                spawnPos = hit.transform.gameObject.transform.position;
-                Destroy(hit.transform.gameObject);
-                resourceNum = 1;
-            }
-
-
-            //Hit collision boxes
-            if (hit.collider != null && hit.transform.parent != null && hit.transform.parent.tag == "Asteroid") {
-                objHit = hit.transform.parent.gameObject;
-                hitObj();
-                PlaySounds.mineClip = true;
-            }
-            if (hit.collider != null && hit.transform.parent != null && hit.transform.parent.tag == "Swarm") {
-                objHit = hit.transform.gameObject;
-                hitObj();
-                PlaySounds.swarmClip = true;
-            }
-            if (hit.collider != null && hit.transform.parent != null && hit.transform.parent.tag == "Pirate") {
-                objHit = hit.transform.gameObject;
-                hitObj();
-                PlaySounds.mineClip = true;
-            }
-        } else {
-            if (objHP < 100) {
-                regenTime -= Time.deltaTime;
-                if (regenTime <= 0) {
-                    objHP = 100;
-                    regenTime = 2f;
-                }
-            }
+            detectHit(hit, "Asteroid", ref PlaySounds.mineClip, ref objHP, 100f, ref BossSpawn.asteroidsMined, 10);
+            detectHit(hit, "Swarm", ref PlaySounds.swarmClip, ref objHP, 100f, ref BossSpawn.swarmsMined, 15);
+            detectHit(hit, "Pirate", ref PlaySounds.mineClip, ref objHP, 10f, ref BossSpawn.piratesMined, 12);
+            detectHit(hit, "Red Asteroid", ref PlaySounds.mineClip, ref objHP, 100f, ref BossSpawn.asteroidsMined, 12);
         }
 
-        //Get random resource from asteroid
-        if (resourceNum != 0) {
-            Stats.stars += Random.Range(3, 7) * PlanetMines.presitgeMult;
-            resourceNum = 0;
+        if (Input.GetMouseButtonDown(0)) {
+            GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+            if (boss != null) {
+                string bossType = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossController>().currentType;
+
+                if (bossType.Equals("Swarm"))
+                    detectHit(hit, "Boss", ref PlaySounds.swarmClip, ref BossSpawn.bossHealth, 1f, ref BossSpawn.bossesMined, 10);
+                else if (bossType.Equals("Pirate") || bossType.Equals("Mega"))
+                    detectHit(hit, "Boss", ref PlaySounds.mineClip, ref BossSpawn.bossHealth, 1f, ref BossSpawn.bossesMined, 10);
+            }
         }
     }
 
+    //Check for click on objects or collision box
+    public void detectHit(RaycastHit2D hit, string tag, ref bool audioClip, ref float objHP, float hitAmnt, ref int bossIncrement, int elementChance) {
+        if (hit.collider != null && (hit.transform.gameObject.tag.Equals(tag) || (hit.transform.parent != null && hit.transform.parent.tag.Equals(tag)))) {
 
-    public void hitObj() {
-        objHP -= 100;
+            if (objHit != hit.transform.gameObject && !tag.Equals("Boss")) {
+                objHit = hit.transform.gameObject;
+                objHP = 100f;
+            }
 
-        if (objHP <= 0) {
-            Destroy(objHit);
-            resourceNum = 1;
-            objHP = 100;
+            objHP -= hitAmnt;
+
+            if (objHP <= 0 && !tag.Equals("Boss")) {
+                if (tag.Equals("Red Asteroid")) {
+                    if (hit.transform.parent == null)
+                        spawnSmalls = true;
+
+                    spawnPos = hit.transform.position;
+                    Destroy(objHit);
+                } else if (hit.transform.parent != null && hit.transform.parent.tag.Equals(tag)) {
+                    Destroy(objHit.transform.parent.gameObject);
+                } else {
+                    Destroy(objHit);
+                }
+
+                if (PrestigeController.prestigeLvl > 1)
+                    Stats.stars += Random.Range(30, 70) * PlanetMines.presitgeMult * PrestigeController.prestigeLvl;
+                else
+                    Stats.stars += Random.Range(3, 7);
+
+                objHP = 100;
+                bossIncrement++;
+            }
+
+            //Possibly mine a rare element
+            int randChance = Random.Range(elementChance, 101);
+            if (randChance <= elementChance) 
+                Stats.elements++;
+
+            audioClip = true;
         }
     }
 }

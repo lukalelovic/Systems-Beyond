@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Tips : MonoBehaviour {
 
-    public GameObject tipObj;
     public Text tipTxt;
+
     bool[] newTip;
-    float fadeTime, tipTime;
+    float fadeTime;
     int iAlpha;
 
 	void Start () {
         newTip = new bool[14];
-        tipObj.gameObject.SetActive(false);
+        tipTxt.gameObject.SetActive(false);
         iAlpha = 175;
         fadeTime = 3f;
-        tipTime = 3f;
 	}
 
 	void Update () {
 
         //Make tip fade out
-        if (tipObj.gameObject.activeInHierarchy == true) {
+        if (tipTxt.gameObject.activeInHierarchy) {
             fadeTime -= Time.deltaTime;
             if (fadeTime <= 0) {
                 if (iAlpha > 2) {
@@ -32,51 +32,35 @@ public class Tips : MonoBehaviour {
             }
 
             if (iAlpha <= 2)
-                tipObj.gameObject.SetActive(false);
+                tipTxt.gameObject.SetActive(false);
         }
         
-        if (Stats.life >= 20 && newTip[0] == false && Stats.lifeLevel == 1) { //Check for new tips
-            triggerTip();
-            tipTxt.text = "Your life has hit its max - Buy the next upgrade in the shop!";
-            newTip[0] = true;
-        } else if (Stats.life >= 25 && newTip[1] == false) {
-            triggerTip();
-            tipTxt.text = "Farms can now be built - Click on the third planet to purchase";
-            newTip[1] = true;
-        } else if (Stats.life >= 50 && newTip[2] == false) {
-            triggerTip();
-            tipTxt.text = "Fleet unlocked - Click the fleet button and place the fleet to deploy it!";
-            newTip[2] = true;
-        } else if (Stats.life >= 55 && newTip[3] == false) {
-            triggerTip();
-            tipTxt.text = "Colonies on other planets can now be established";
-            newTip[3] = true;
-        } else if (Stats.life >= 100 && newTip[4] == false) {
-            triggerTip();
-            tipTxt.text = "Prestige unlocked - Click the prestige button to travel to new system!";
-            newTip[4] = true;
-        } else if (Stats.life >= 101 && newTip[5] == false) {
-            tipTime -= Time.deltaTime;
-            if (tipTime <= 0) {
-                triggerTip();
-                tipTxt.text = "Your life has hit its max - Buy the next upgrade to increase it";
-            }
-            newTip[5] = true;
-        } else if (Stats.stars >= 30 && newTip[6] == false) { //Show tips if condition is met
-            triggerTip();
-            tipTxt.text = "Planets can be added to your solar system in the shop";
-            newTip[6] = true;
-        } else if (Stats.stars >= 100 && newTip[7] == false && GameObject.FindGameObjectsWithTag("Orbit").Length >= 3) {
-            triggerTip();
-            tipTxt.text = "Upgrade your life in the shop to add more %";
-            newTip[7] = true;
-        }
+        //Check if tip hasn't been shown and should be
+        if (Stats.lifeLevel == 1) 
+            checkTip(Stats.life, 20, 0, "Your life has hit its max - Buy the next upgrade in the shop!");
+
+        checkTip(Stats.life, 25, 1, "Farms can now be built - Click on the third planet to purchase");
+        checkTip(Stats.life, 50, 2, "Fleet unlocked - Click the fleet button OR press Q to place and deploy it!");
+        checkTip(Stats.life, 55, 3, "Colonies on other planets can now be established");
+        checkTip(Stats.life, 100, 4, "Prestige unlocked - Click the prestige button to travel to new system!");
+        checkTip(Stats.stars, 30, 6, "Planets can be added to your solar system in the shop");
+
+        if (GameObject.FindGameObjectsWithTag("Orbit").Length >= 3)
+            checkTip(Stats.stars, 100, 7, "Upgrade your life in the shop to add more %");
 	}
+
+    public void checkTip(long stat, int min, int index, string tip) {
+        if (stat >= min && !newTip[index]) {
+            triggerTip();
+            tipTxt.text = tip;
+            newTip[index] = true;
+        }
+    }
 
     public void triggerTip() {
         iAlpha = 175;
         tipTxt.color = new Color32(255, 255, 255, 255);
-        tipObj.gameObject.SetActive(true);
+        tipTxt.gameObject.SetActive(true);
         fadeTime = 3f;
     }
 }

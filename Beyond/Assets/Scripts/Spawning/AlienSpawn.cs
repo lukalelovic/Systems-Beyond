@@ -9,7 +9,8 @@ public class AlienSpawn : MonoBehaviour {
     
     public static int swarmCount, pirateCount;
     public static bool spawnSwarm, spawnPirate;
-    float randX, randY, swarmTime, pirateTime;
+    public static float swarmTime;
+    float randX, randY, pirateTime;
     int swarmNum, spawnPt;
 
     void Start() {
@@ -51,8 +52,10 @@ public class AlienSpawn : MonoBehaviour {
                     swarmTime = Random.Range(5, 20);
                 else if (swarmCount < 12)
                     swarmTime = Random.Range(20, 60);
-                else
+                else if (swarmCount < 45)
                     swarmTime = Random.Range(60, 120);
+                else 
+                    swarmTime = Random.Range(60, 200);
             }
         }
 

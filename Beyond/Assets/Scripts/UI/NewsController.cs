@@ -44,6 +44,11 @@ public class NewsController : MonoBehaviour {
 
         if (AlienSpawn.spawnPirate == true)
             newsTxt.text += PirateNews();
+
+        if (BossSpawn.bossSpawned) {
+            string bossType = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossController>().currentType;
+            BossNews(bossType);
+        }
     }
 
     private string AsteroidNews() {
@@ -70,6 +75,17 @@ public class NewsController : MonoBehaviour {
         } else {
             return "";
         }
+    }
+
+    private string BossNews(string type) {
+        if (type.Equals("Swarm"))
+            return "\n\n*ALERT* The 'Hive Mind' has spawned! Destroy it quickly before it attracts more Swarm!";
+        else if (type.Equals("Pirate"))
+            return "\n\n*ALERT* The 'Quarter Master' has spawned! Defeat it before it wreaks havoc on your planets!";
+        else if (type.Equals("Mega"))
+            return "\n\n*ALERT* The 'World Eater' and is hungry for your solar system!";
+        else
+            return "";
     }
 
     private string LifeNews() { //Add notifications as life increases

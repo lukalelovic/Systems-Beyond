@@ -14,10 +14,11 @@ public class PrestigeController : MonoBehaviour {
 
 	void Start () {
 		prestigeBtn.gameObject.SetActive(false);
-		prestigeConfirm.gameObject.SetActive(false);
+		prestigeTxt.gameObject.SetActive(false);
+		prestigeConfirm.SetActive(false);
+
 		prestige = false;
 		prestigeLvl = 0;
-		prestigeTxt.gameObject.SetActive(false);
 	}
 	
 	void Update () {
@@ -30,7 +31,7 @@ public class PrestigeController : MonoBehaviour {
 			List<GameObject> deletes = new List<GameObject>();
 			deletes.AddRange(GameObject.FindGameObjectsWithTag("Orbit")); deletes.AddRange(GameObject.FindGameObjectsWithTag("Swarm")); 
 			deletes.AddRange(GameObject.FindGameObjectsWithTag("Red Asteroid")); deletes.AddRange(GameObject.FindGameObjectsWithTag("Fleet"));
-			deletes.AddRange(GameObject.FindGameObjectsWithTag("Asteroid"));
+			deletes.AddRange(GameObject.FindGameObjectsWithTag("Asteroid")); deletes.AddRange(GameObject.FindGameObjectsWithTag("Pirate"));
 
 			foreach (GameObject g in deletes)
 				Destroy(g);
@@ -38,9 +39,10 @@ public class PrestigeController : MonoBehaviour {
 			foreach(GameObject p in GameObject.FindGameObjectsWithTag("Orbit"))
 				Destroy(p);
 
-			PlanetMines.presitgeMult *= 10;
-			PlanetMines.changeCosts = 1;
+			PlanetMines.presitgeMult *= 4;
+			PlanetMines.changeCosts = true;
 			Stats.mines = 0;
+			Stats.stars = 0;
 			Stats.lifeMin += 101;
 			SunBuy.randSun = 1;
 			SystemSpawn.previousPos = 2;

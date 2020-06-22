@@ -18,28 +18,27 @@ public class Cursor : MonoBehaviour {
         RaycastHit2D hit;
         hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-        if (checkIntro()) {
+        if (checkIntro()) 
             showHover = false;
-        } else {
-            if (hit.collider != null && hit.transform.parent != null && hit.transform.parent.gameObject.transform.tag == "Orbit")
-                showHover = true;
-            else if (hit.collider != null && hit.transform.gameObject.tag == "Sun")
-                showHover = true;
-            else if (EventSystem.current.IsPointerOverGameObject() && !EventSystem.current.tag.Equals("Resource"))
-                showHover = true;
-            else
-                showHover = false;
-        }
+        else if (hit.collider != null && hit.transform.parent != null && hit.transform.parent.gameObject.transform.tag == "Orbit")
+            showHover = true;
+        else if (hit.collider != null && hit.transform.gameObject.tag == "Sun")
+            showHover = true;
+        else if (EventSystem.current.IsPointerOverGameObject() && !EventSystem.current.tag.Equals("Resource"))
+            showHover = true;
+        else
+            showHover = false;
+        
 
-        if (showHover == true)
+        if (showHover)
             UnityEngine.Cursor.SetCursor(selectTxt, hotSpot, cursorMode);
         else
             UnityEngine.Cursor.SetCursor(defaultTxt, hotSpot, cursorMode);
     }
     
     public bool checkIntro() {
-        if (GameObject.FindGameObjectsWithTag("Intro").Length == 0)
-            return false;
-        return true;
+        if (Intro.fadeOut > 2)
+            return true;
+        return false;
     }
 }

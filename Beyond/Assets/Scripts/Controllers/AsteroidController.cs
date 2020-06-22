@@ -32,7 +32,6 @@ public class AsteroidController : MonoBehaviour {
         if (distToSun > 65 || distToSun < -65)
             Destroy(this.gameObject);
         
-
         if (deleteTime <= 0)
             Destroy(this.gameObject);
         
@@ -40,8 +39,11 @@ public class AsteroidController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Sun"))
-        {
             Destroy(this.gameObject);
+        if (other.gameObject.CompareTag("Shield")) {
+            Destroy(other.gameObject);
+
+            GlobalFunc.Shake(new Vector3(this.transform.position.x, this.transform.position.y, -10));
         }
     }
 }

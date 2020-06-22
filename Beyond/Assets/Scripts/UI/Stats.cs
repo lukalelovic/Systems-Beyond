@@ -7,7 +7,7 @@ public class Stats : MonoBehaviour {
 
     public static long stars, mines;
     public Text starTxt, lifeTxt;
-    public static int life, lifeLevel, lifeMin, lifeStop;
+    public static int life, lifeLevel, lifeMin, lifeStop, elements; //lifeMin = min your life can be, lifeStop = where your life must stop
     float countLife, mineTime;
 
     void Start() {
@@ -25,7 +25,7 @@ public class Stats : MonoBehaviour {
         if (life < lifeMin)
             life = lifeMin;
         
-        if (life < lifeStop && lifeLevel > 0) //Add life over time
+        if (life < lifeStop && lifeLevel > 0)
             addLife();
         else if (lifeLevel > 0)
             lifeTxt.text = life.ToString() + "% *MAX*";
@@ -36,11 +36,11 @@ public class Stats : MonoBehaviour {
             mineTime = 1;
         }
 
-        Abbreviation.setLongAbbreviation(stars, starTxt);
+        GlobalFunc.setLongAbbreviation(stars, starTxt);
     }
 
+    //Add life over time
     public void addLife() {
-        
         countLife -= Time.deltaTime;
         if (countLife <= 0) {
             life += 1;
@@ -52,6 +52,7 @@ public class Stats : MonoBehaviour {
             else
                 countLife = Random.Range(6f, 8f);
         }
+        
         lifeTxt.text = life.ToString() + "%";
     }
 }

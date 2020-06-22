@@ -17,7 +17,7 @@ public class PlanetColor : MonoBehaviour {
         dist = Vector3.Distance(this.transform.position, GameObject.FindGameObjectWithTag("Sun").transform.position);
         if (this.gameObject.tag.Equals("Foreground")) {
             if (dist >= 12f) 
-                assignColor(10,255,0,255,165,200);
+                assignColor(0,255,0,255,240,255);
             else if (dist >= 9f) 
                 assignColor(0,80,0,255,200,255);
             else if (dist >= 7f) 
@@ -25,13 +25,13 @@ public class PlanetColor : MonoBehaviour {
             else if (dist >= 5f) 
                 assignColor(0,30,90,130,0,55);
             else if (dist >= 4f) 
-                assignColor(100,170,100,170,100,170);
+                assignColor(160,255,100,170,0,70);
             else 
                 assignColor(200,240,0,33,0,33);
         } 
         else if (this.gameObject.tag.Equals("Background")) {
             if (dist >= 12f) 
-                assignColor(0,255,0,255,130,255);
+                assignColor(0,255,0,165,175,255);
             else if (dist >= 9f) 
                 assignColor(0,10,0,255,130,255);
             else if (dist >= 7f) 
@@ -45,7 +45,7 @@ public class PlanetColor : MonoBehaviour {
         } 
         else if (this.gameObject.tag.Equals("Planet")) {
             if (dist >= 12f) 
-                assignColor(10,100,100,200,0,255);
+                assignColor(10,100,100,200,130,255);
             else if (dist >= 9f) 
                 assignColor(0,10,20,255,130,255);
             else if (dist > 7f) 
@@ -53,7 +53,7 @@ public class PlanetColor : MonoBehaviour {
             else if (dist >= 5f) 
                 assignColor(0,70,0,200,150,255);
             else if (dist >= 4f) 
-                assignColor(90,255,0,150,0,80);
+                assignColor(90,130,60,100,0,80);
             else 
                 assignColor(30,70,0,0,0,0);
         }

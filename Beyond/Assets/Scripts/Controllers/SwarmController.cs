@@ -29,7 +29,9 @@ public class SwarmController : MonoBehaviour {
 	void Update () {
         distToSun = Vector3.Distance(this.gameObject.transform.position, GameObject.FindGameObjectWithTag("Sun").transform.position);
 
-        if (distToSun < 20 && distToSun > 6) {//Swarm break off when close to sun
+        if (distToSun < 20 && distToSun > 6 && this.transform.parent != null) {//Swarm break off when close to sun
+            travelTowards = true;
+        } else if (this.transform.parent == null && distToSun > 6) {
             travelTowards = true;
         } else if (distToSun < 6) {
             travelTowards = false;

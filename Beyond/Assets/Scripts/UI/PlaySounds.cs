@@ -6,9 +6,10 @@ public class PlaySounds : MonoBehaviour {
 
     public AudioSource[] AudSources;
 
-    public AudioClip[] mineAsteroids, soundClips;
-
-    public static bool mineClip, shopClip, purchase, collide, notification, swarmClip, shootClip;
+    public AudioClip[] soundClips;
+    
+    public static bool mineClip, shopClip, purchase, collide, 
+    notification, swarmClip, shootClip, bossClip2, bossClip3;
 
     float waitToPlay;
 
@@ -23,66 +24,31 @@ public class PlaySounds : MonoBehaviour {
             waitToPlay -= Time.deltaTime;
         }
 
-		if (mineClip == true) {
-            randClip();
-            mineClip = false;
-        }
-        if (shopClip == true) {
-            playShop();
-            shopClip = false;
-        }
-        if (purchase == true) {
-            playBuy();
-            purchase = false;
-        }
-        if (collide == true) {
-            playCollide();
-            collide = false;
-        }
-        if (notification == true) {
-            playNotif();
-            notification = false;
-        }
-        if (swarmClip == true) {
-            playSwarm();
-            swarmClip = false;
-        }
-        if (shootClip == true) {
-            playShoot();
-            shootClip = false;
-        }
+        play(ref shopClip, 0, 0, false);
+        play(ref purchase, 0, 1, false);
+        play(ref collide, 1, 2, false);
+        play(ref notification, 2, 3, false);
+        play(ref shootClip, 3, 5, false);
+        
+        play(ref swarmClip, 1, 4, true);
+        play(ref mineClip, 0, 6, true);
+
+        play(ref bossClip2, 4, 7, false);
+        play(ref bossClip3, 4, 8, true);
 	}
 
+    public void play(ref bool clipBool, int sourceIndex, int clipindex, bool checkOverlap) {
+        if (clipBool) {
+            AudSources[sourceIndex].clip = soundClips[clipindex];
 
-    public void randClip() {
-        int num = Random.Range(0, mineAsteroids.Length);
-        AudSources[0].clip = mineAsteroids[num];
-        if (!AudSources[0].isPlaying)
-            AudSources[0].Play();
-    }
-    public void playSwarm() {
-        AudSources[1].clip = soundClips[4];
-        if (!AudSources[1].isPlaying)
-            AudSources[1].Play();
-    }
-    public void playShop() {
-        AudSources[0].clip = soundClips[0];
-        AudSources[0].Play();
-    }
-    public void playBuy() {
-        AudSources[0].clip = soundClips[1];
-        AudSources[0].Play();
-    }
-    public void playCollide() {
-        AudSources[1].clip = soundClips[2];
-        AudSources[1].Play();
-    }
-    public void playNotif() {
-        AudSources[2].clip = soundClips[3];
-        AudSources[2].Play();
-    }
-    public void playShoot() {
-        AudSources[3].clip = soundClips[5];
-        AudSources[3].Play();
+            if (checkOverlap) {
+                if (!AudSources[sourceIndex].isPlaying)
+                    AudSources[sourceIndex].Play();
+            } else {
+                AudSources[sourceIndex].Play();
+            }
+
+            clipBool = false;
+        }
     }
 }
